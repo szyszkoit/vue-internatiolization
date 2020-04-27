@@ -9,33 +9,102 @@
     <h3>{{ $t('plugins') }}</h3>
     <ul>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
     </ul>
     <h3>{{ $t('links') }}</h3>
     <ul>
       <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
     </ul>
     <h3>{{ $t('ecosystem') }}</h3>
     <ul>
       <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <localization-provider :language="'es-ES'">
+          <intl-provider :locale="'es'" >
+              <kendo-grid
+              :data-source="localDataSource"
+              :groupable="true"
+              >
+                  <kendo-grid-column :field="'ProductID'"
+                                    :title="'ID'"
+                                    :width="40"></kendo-grid-column>
+                  <kendo-grid-column :field="'ProductName'"></kendo-grid-column>
+                  <kendo-grid-column :field="'UnitPrice'"
+                                    :title="'Unit Price'"
+                                    :width="120"
+                                    :format="'{0:c}'"></kendo-grid-column>
+                  <kendo-grid-column :field="'UnitsInStock'"
+                                    :title="'Units In Stock'"
+                                    :width="120"></kendo-grid-column>
+                  <kendo-grid-column :field="'Discontinued'" :width="120"></kendo-grid-column>
+              </kendo-grid>
+          </intl-provider>
+      </localization-provider>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'HelloWorld',
   props: {
-    msg: String
-  }
+    locale: String,
+    kendo_locale: String,
+  },
+  data: function () {
+    return {
+        skip: 0,
+        take: 7,
+        // columns: [
+        //     { field: 'ProductID', title: 'ID', width: '70px', filterable: false},
+        //     { field: 'ProductName', title: 'Nombre del producto' },
+        //     { field: 'FirstOrderedOn', title: 'Primero ordenado en', filter: 'date', format: '{0:D}' },
+        //     { field: 'UnitPrice', title: 'Precio unitario', filter: 'numeric', format: '{0:c}' }
+        // ],
+        localDataSource: [{
+                "ProductID": 1,
+                "ProductName": "Chai",
+                "UnitPrice": 18,
+                "UnitsInStock": 39,
+                "Discontinued": false,
+            },
+            {
+                "ProductID": 2,
+                "ProductName": "Chang",
+                "UnitPrice": 17,
+                "UnitsInStock": 40,
+                "Discontinued": false,
+            },
+            {
+                "ProductID": 3,
+                "ProductName": "Aniseed Syrup",
+                "UnitPrice": 10,
+                "UnitsInStock": 13,
+                "Discontinued": false,
+            },
+            {
+                "ProductID": 4,
+                "ProductName": "Chef Anton's Cajun Seasoning",
+                "UnitPrice": 22,
+                "UnitsInStock": 53,
+                "Discontinued": false,
+            },
+            {
+                "ProductID": 5,
+                "ProductName": "Chef Anton's Gumbo Mix",
+                "UnitPrice": 21.35,
+                "UnitsInStock": 0,
+                "Discontinued": true,
+            },
+            {
+                "ProductID": 6,
+                "ProductName": "Grandma's Boysenberry Spread",
+                "UnitPrice": 25,
+                "UnitsInStock": 120,
+                "Discontinued": false,
+            },
+        ],
+    }
+  },
 }
 </script>
 

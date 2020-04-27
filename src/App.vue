@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <div>
-      <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)">
+      <button v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language, entry.kendo_locale)">
         <flag :iso="entry.flag" v-bind:squared=false /> {{entry.title}}
       </button>
     </div>
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld/>
+    <HelloWorld :locale="locale" :kendo_locale="kendo_locale"/>
   </div>
 </template>
 
@@ -18,15 +18,19 @@ export default {
   name: 'App',
   data() {
     return {
+      locale:'en',
+      kendo_locale: 'en-EN',
       languages: [
         {
           flag: 'us',
           language: 'en',
+          kendo_locale:'en-EN',
           title: 'English'
         },
         {
           flag: 'es',
           language: 'es',
+          kendo_locale:'es-ES',
           title: 'Español'
         }
       ],
@@ -36,8 +40,10 @@ export default {
     HelloWorld
   },
   methods: {
-    changeLocale(locale) {
+    changeLocale(locale, kendo_locale) {
       i18n.locale = locale;
+      const messages = `../node_modules/progress/kendo-ui/js/messages/kendo.messages.${kendo_locale}.js`
+      import(messages);
     }
   }
 }
